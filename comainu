@@ -1,0 +1,3 @@
+#!/bin/bash
+cd Comainu-0.70
+./script/comainu.pl "$@"
