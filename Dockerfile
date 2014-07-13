@@ -1,8 +1,7 @@
 FROM ubuntu
 MAINTAINER Shunsuke Kozawa <shunsuke.kozawa@gmail.com>
 
-RUN apt-get update
-RUN apt-get install -y build-essential unzip wget
+RUN apt-get update && apt-get install -y build-essential unzip wget && apt-get clean
 
 # CRF++
 RUN wget --no-check-certificate "https://crfpp.googlecode.com/files/CRF%2B%2B-0.58.tar.gz" -O CRF++.tar.gz
@@ -38,6 +37,8 @@ RUN tar -xzf Comainu-src.tgz
 RUN wget "http://sourceforge.jp/frs/redir.php?m=iij&f=%2Fcomainu%2F60782%2FComainu-0.70-model.tgz" -O Comainu-model.tgz
 RUN tar -xzf Comainu-model.tgz
 RUN cd Comainu-0.70; ./configure
+
+RUN rm -rf CRF++.tar.gz CRF++-0.58 TinySVM.tar.gz TinySVM-0.09 yamcha.tar.gz yamcha.patch yamcha-0.33 mecab.tar.gz mecab-0.996 unidic-mecab.zip unidic-mecab-2.1.2_src Comainu-src.tgz Comainu-model.tgz
 
 ADD comainu /bin/comainu
 RUN chmod 755 /bin/comainu
